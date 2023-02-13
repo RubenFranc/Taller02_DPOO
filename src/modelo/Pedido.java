@@ -55,7 +55,7 @@ public class Pedido {
 	
 	private String generarTextoFactura() {
 		String mssg = "";
-		mssg += "RESTAURANTE DE HAMBUEGUESAS DPOO\n";
+		mssg += "RESTAURANTE DE HAMBURGUESAS DPOO\n";
 		mssg += "--------------------------------\n\n";
 		mssg += "ID pedido: " + idPedido + "\n";
 		mssg += "Nombre cliente: " + nombreCliente + "\n";

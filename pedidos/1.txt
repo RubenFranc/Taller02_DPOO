@@ -1,22 +1,19 @@
-RESTAURANTE DE HAMBUEGUESAS DPOO
+RESTAURANTE DE HAMBURGUESAS DPOO
 --------------------------------
 
 ID pedido: 1
-Nombre cliente: Rubén Franco
-Dirección cliente: Kra 2 # 16a - 38
+Nombre cliente: Víctor Franco
+Dirección cliente: Cll 50 # 18 - 03
 
 Artículos comprados
 --------------------------------
-* combo corral -> $28050.0
-    (Con adición de tocineta picada,)
-* wrap de pollo -> $15000.0
-    (Sin frijol refrito,)
-* agua cristal con gas -> $5000.0
+* combo todoterreno -> $38817.0
+    (Con adición de queso fundido,)
 
 --------------------------------
-Precio neto: $48050.0
-IVA: $9129.5
-Precio total: $57179.5
+Precio neto: $38817.0
+IVA: $7375.2300000000005
+Precio total: $46192.23
 --------------------------------
 
 ¡Gracias por su compra!
