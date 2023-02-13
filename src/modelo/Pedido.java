@@ -53,7 +53,7 @@ public class Pedido {
 		return precioTotal;
 	}
 	
-	private String generarTextoFactura() {
+	public String generarTextoFactura() {
 		String mssg = "";
 		mssg += "RESTAURANTE DE HAMBURGUESAS DPOO\n";
 		mssg += "--------------------------------\n\n";

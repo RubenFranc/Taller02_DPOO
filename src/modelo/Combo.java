@@ -27,7 +27,7 @@ public class Combo extends Producto {
 	}
 	
 	public String generarTextoFactura() {
-		String mssg = "* " + nombreCombo + " -> $" + getPrecio() + ".\n";
+		String mssg = "* " + nombreCombo + " -> $" + getPrecio() + "\n";
 		for (Producto producto: items) {
 			mssg += "  -" + producto.getNombre() + "\n";
 		}

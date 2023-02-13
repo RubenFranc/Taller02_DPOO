@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Map;
+
 import modelo.Restaurante;
 import modelo.Ingrediente;
 import modelo.Pedido;
@@ -29,6 +31,7 @@ public class Aplicacion {
 		boolean pedidoEnCurso = false;
 		double nItems = 0;
 		Pedido pedido = null;
+		Map<Integer, String> mapPedidos = restaurante.getPedidos();
 		while (continuar){
 			try{
 				mostrarMenu(pedidoEnCurso);
@@ -40,6 +43,17 @@ public class Aplicacion {
 						String direccionCliente = input("\nPor favor ingrese su dirección");
 						restaurante.iniciarPedido(nombreCliente, direccionCliente);
 						pedido = restaurante.getPedidoEnCurso();
+					}
+					else if (opcion_seleccionada == 2){
+						int ID = Integer.parseInt(input("\nPor favor ingrese el ID del pedido"));
+						String factura = mapPedidos.get(ID);
+						if (factura == null) {
+							System.out.println("\nNo existe ningún pedido cuyo ID sea " + ID);
+						}
+						else {
+							System.out.println("\n");
+							System.out.println(factura);
+						}
 					}
 					else {
 						System.out.println("Saliendo de la aplicación ...");
@@ -95,7 +109,9 @@ public class Aplicacion {
 					}
 					else {
 						if (nItems > 0 & opcion_seleccionada == 2) {
+							
 							restaurante.cerrarYGuardarPedido();
+							mapPedidos.put(pedido.getIdPedido(), pedido.generarTextoFactura());
 							pedidoEnCurso = false;
 						}
 						
@@ -113,7 +129,8 @@ public class Aplicacion {
 		System.out.println("\nOpciones:");
 		if (pedidoEnCurso == false) {
 			System.out.println("1. Hacer pedido");
-			System.out.println("2. Cerrar aplicación");
+			System.out.println("2. Consultar pedidos por ID");
+			System.out.println("3. Cerrar aplicación");
 		}
 		else {
 			System.out.println("1. Agregar producto");

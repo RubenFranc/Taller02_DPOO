@@ -35,12 +35,12 @@ public class ProductoAjustado extends Producto{
 
 	@Override
 	public String generarTextoFactura() {
-		String mssg = "* " + getNombre() + " -> $" + precio + "\n";
+		String mssg = productoBase.generarTextoFactura();
 		if (agregados != "") {
-			mssg += "    (Con adición de " + agregados + ")\n";
+			mssg += "  (Con adición de " + agregados + ")\n";
 		}
 		if (eliminados != "") {
-			mssg += "    (Sin " + eliminados + ")\n";
+			mssg += "  (Sin " + eliminados + ")\n";
 		}
 		return mssg;
 	}

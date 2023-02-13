@@ -14,24 +14,23 @@ public class Restaurante {
 	private Pedido pedidoEnCurso;
 	private ArrayList<Producto> menuBase;
 	private ArrayList<Ingrediente> ingredientes;
-	//private ArrayList<Combo> combos;
 	private Map<String, Ingrediente> mapIngredientes;
 	private Map<String, Producto> mapMenuBase;
-	//private Map<String, Combo> mapCombos;
+	private Map<Integer, String> mapPedidos;
 	
 	public Restaurante() {
 		this.numeroPedidos = 0;
 		this.menuBase = new ArrayList<>();
 		this.ingredientes = new ArrayList<>();
-		//this.combos = new ArrayList<>();
 		this.mapIngredientes = new HashMap<>();
 		this.mapMenuBase = new HashMap<>();
-		//this.mapCombos = new HashMap<>();
+		this.mapPedidos = new HashMap<>();
 	}
 	
 	public void iniciarPedido(String nombreCliente, String direccionCliente) {
 		Pedido pedido = new Pedido(nombreCliente, direccionCliente, numeroPedidos);
 		this.pedidoEnCurso = pedido;
+		this.numeroPedidos +=1;
 	}
 	
 	public Pedido getPedidoEnCurso() {
@@ -39,9 +38,10 @@ public class Restaurante {
 	}
 	
 	public void cerrarYGuardarPedido() throws IOException {
-		 String ruta = "pedidos/"+pedidoEnCurso.getIdPedido()+".txt";
-         File file = new File(ruta);
-		 pedidoEnCurso.guardarFactura(file);
+		mapPedidos.put(pedidoEnCurso.getIdPedido(), pedidoEnCurso.generarTextoFactura());
+		String ruta = "pedidos/"+pedidoEnCurso.getIdPedido()+".txt";
+		File file = new File(ruta);
+		pedidoEnCurso.guardarFactura(file);
 	}
 	
 	public ArrayList<Producto> getMenuBase(){
@@ -52,9 +52,9 @@ public class Restaurante {
 		return this.ingredientes;
 	}
 	
-	//public ArrayList<Combo> getCombos(){
-		//return this.combos;
-	//}
+	public Map<Integer, String> getPedidos(){
+		return this.mapPedidos;
+	}
 	
 	public Producto getProducto(String nombre) {
 		return mapMenuBase.get(nombre);

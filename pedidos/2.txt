@@ -1,0 +1,26 @@
+RESTAURANTE DE HAMBURGUESAS DPOO
+--------------------------------
+
+ID pedido: 2
+Nombre cliente: Víctor Salians
+Dirección cliente: Kra 2 # 16a - 38
+
+Artículos comprados
+--------------------------------
+* combo todoterreno -> $34317.0
+  -todoterreno
+  -papas grandes
+  -gaseosa
+  (Con adición de tocineta picada,)
+* combo especial -> $32085.0
+  -especial
+  -papas medianas
+  -gaseosa
+
+--------------------------------
+Precio neto: $72402.0
+IVA: $13756.380000000001
+Precio total: $86158.38
+--------------------------------
+
+¡Gracias por su compra!
