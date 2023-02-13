@@ -48,6 +48,9 @@ public class Aplicacion {
 				}
 				else {
 					if (opcion_seleccionada == 1) {
+						for (Producto producto: menuBase) {
+							System.out.println(producto.generarTextoFactura());
+						}
 						String nombre = input("\nPor favor ingrese el nombre del producto que desea agregar al pedido");
 						Producto producto = restaurante.getProducto(nombre);
 						if (producto != null) {
