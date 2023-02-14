@@ -1,6 +1,6 @@
 package modelo;
 
-public class ProductoMenu extends Producto{
+public class ProductoMenu implements Producto{
 	
 	private String nombre;
 	private double precio;

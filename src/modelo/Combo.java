@@ -2,7 +2,7 @@ package modelo;
 
 import java.util.ArrayList;
 
-public class Combo extends Producto {
+public class Combo implements Producto {
 
 	private double descuento;
 	private String nombreCombo;
@@ -18,6 +18,7 @@ public class Combo extends Producto {
 		items.add(itemCombo);
 	}
 	
+	@Override
 	public double getPrecio() {
 		double p = 0;
 		for (Producto producto: items) {
@@ -26,6 +27,7 @@ public class Combo extends Producto {
 		return p;
 	}
 	
+	@Override
 	public String generarTextoFactura() {
 		String mssg = "* " + nombreCombo + " -> $" + getPrecio() + "\n";
 		for (Producto producto: items) {

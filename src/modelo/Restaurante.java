@@ -18,8 +18,8 @@ public class Restaurante {
 	private Map<String, Producto> mapMenuBase;
 	private Map<Integer, String> mapPedidos;
 	
-	public Restaurante() {
-		this.numeroPedidos = 0;
+	public Restaurante(int numeroPedidos) {
+		this.numeroPedidos = numeroPedidos;
 		this.menuBase = new ArrayList<>();
 		this.ingredientes = new ArrayList<>();
 		this.mapIngredientes = new HashMap<>();

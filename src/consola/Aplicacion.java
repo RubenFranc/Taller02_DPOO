@@ -1,8 +1,13 @@
 package consola;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -18,7 +23,12 @@ public class Aplicacion {
 		System.out.println("\nBienvenido al restaurante de hamburguesas DPOO");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 		
-		Restaurante restaurante = new Restaurante();
+		BufferedReader br = new BufferedReader(new FileReader("numeroPedidos/numeroPedidos.txt"));
+		String linea = br.readLine();
+		int numeroPedidosInicial = Integer.parseInt(linea);
+		br.close();
+		
+		Restaurante restaurante = new Restaurante(numeroPedidosInicial);
 		restaurante.cargarInformacionRestaurante("data/ingredientes.txt", "data/menu.txt", "data/combos.txt");
 		System.out.println("MENÚ:\n------------------------------");
 		ArrayList<Producto> menuBase = restaurante.getMenuBase();
@@ -58,6 +68,17 @@ public class Aplicacion {
 					else {
 						System.out.println("Saliendo de la aplicación ...");
 						continuar = false;
+						
+						File file = new File("numeroPedidos/numeroPedidos.txt");
+						FileWriter fw = new FileWriter(file);
+				        BufferedWriter bw = new BufferedWriter(fw);
+				        PrintWriter wr = new PrintWriter(bw);  
+				        int numeroPedidosFinal = restaurante.getPedidoEnCurso().getIdPedido();
+				        String numeroPedidos = Integer.toString(numeroPedidosFinal);
+				        wr.write(numeroPedidos);
+				        wr.close();
+				        bw.close();
+						
 					}
 				}
 				else {

@@ -1,6 +1,6 @@
 package modelo;
 
-public class ProductoAjustado extends Producto{
+public class ProductoAjustado implements Producto{
 	
 	private Producto productoBase;
 	private double precio;

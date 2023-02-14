@@ -1,10 +1,11 @@
 package modelo;
 
-public abstract class Producto {
+public interface Producto {
 	
-	public abstract double getPrecio();
+	public  double getPrecio();
 	
-	public abstract String getNombre();
+	public String getNombre();
 	
-	public abstract String generarTextoFactura();
+	public String generarTextoFactura();
+
 }
