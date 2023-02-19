@@ -37,11 +37,30 @@ public class Aplicacion {
 			System.out.println(producto.generarTextoFactura());
 		}
 		
+		BufferedReader br_2 = new BufferedReader(new FileReader("idPedidos.txt"));
+		String id = br_2.readLine();
+		Map<Integer, String> mapPedidos = restaurante.getPedidos();
+		String idPedidos = id + "\n";
+		while (id != null) {
+			String id_ = id.replace("\n", "");
+			BufferedReader br_3 = new BufferedReader(new FileReader("pedidos/"+ id_ +".txt"));
+			String lineaFactura = br_3.readLine();
+			String factura_1 = "";
+			while (lineaFactura != null) {
+				factura_1 += lineaFactura + "\n";
+				lineaFactura = br_3.readLine();
+			}
+			br_3.close();
+			mapPedidos.put(Integer.parseInt(id), factura_1);
+			idPedidos += id + "\n";
+			id = br_2.readLine();
+		}
+		br_2.close();
+		
 		boolean continuar = true;
 		boolean pedidoEnCurso = false;
 		double nItems = 0;
 		Pedido pedido = null;
-		Map<Integer, String> mapPedidos = restaurante.getPedidos();
 		while (continuar){
 			try{
 				mostrarMenu(pedidoEnCurso);
@@ -73,7 +92,7 @@ public class Aplicacion {
 						FileWriter fw = new FileWriter(file);
 				        BufferedWriter bw = new BufferedWriter(fw);
 				        PrintWriter wr = new PrintWriter(bw);  
-				        int numeroPedidosFinal = restaurante.getPedidoEnCurso().getIdPedido();
+				        int numeroPedidosFinal = restaurante.getPedidos().size();
 				        String numeroPedidos = Integer.toString(numeroPedidosFinal);
 				        wr.write(numeroPedidos);
 				        wr.close();
@@ -103,9 +122,17 @@ public class Aplicacion {
 									}
 									String nombreIngrediente = input("\nPor favor ingrese el nombre del ingrediente del que desea la adición");
 									Ingrediente ingrediente = restaurante.getIngrediente(nombreIngrediente);
-									ProductoAjustado productoAjustado = new ProductoAjustado(producto);
-									productoAjustado.agregarIngrediente(ingrediente);
-									pedido.agregarProducto(productoAjustado);
+									if (ingrediente != null) {
+										ProductoAjustado productoAjustado = new ProductoAjustado(producto);
+										//System.out.println(productoAjustado.getCalorias());
+										productoAjustado.agregarIngrediente(ingrediente);
+										//System.out.println(productoAjustado.getCalorias());
+										pedido.agregarProducto(productoAjustado);
+									}
+									else {
+										System.out.println("Seleccione un ingrediente válido.");
+									}
+									
 								}
 								else {
 									for (Ingrediente ingrediente: ingredientes) {
@@ -113,11 +140,17 @@ public class Aplicacion {
 										}
 									String nombreIngrediente = input("\nPor favor ingrese el nombre del ingrediente que desea quitar");
 									Ingrediente ingrediente = restaurante.getIngrediente(nombreIngrediente);
-									ProductoAjustado productoAjustado = new ProductoAjustado(producto);
-									productoAjustado.eliminarIngrediente(ingrediente);
-									pedido.agregarProducto(productoAjustado);
-								}
-								
+									if (ingrediente != null) {
+										ProductoAjustado productoAjustado = new ProductoAjustado(producto);
+										//System.out.println(productoAjustado.getCalorias());
+										productoAjustado.eliminarIngrediente(ingrediente);
+										//System.out.println(productoAjustado.getCalorias());
+										pedido.agregarProducto(productoAjustado);
+									}
+									else {
+										System.out.println("Seleccione un ingrediente válido.");
+									}
+								}	
 							}
 							else {
 								pedido.agregarProducto(producto);
@@ -130,12 +163,20 @@ public class Aplicacion {
 					}
 					else {
 						if (nItems > 0 & opcion_seleccionada == 2) {
-							
-							restaurante.cerrarYGuardarPedido();
+
 							mapPedidos.put(pedido.getIdPedido(), pedido.generarTextoFactura());
+							restaurante.cerrarYGuardarPedido();
 							pedidoEnCurso = false;
+							int idPedido = pedido.getIdPedido();
+							idPedidos += idPedido + "\n";
+							File file = new File("idPedidos.txt");
+							FileWriter fw = new FileWriter(file);
+					        BufferedWriter bw = new BufferedWriter(fw);
+					        PrintWriter wr = new PrintWriter(bw);  
+					        wr.write(idPedidos);
+					        wr.close();
+					        bw.close();
 						}
-						
 					}
 				}
 			}
