@@ -4,10 +4,12 @@ public class ProductoMenu implements Producto{
 	
 	private String nombre;
 	private double precio;
+	private int n;
 
-	public ProductoMenu(String nombre, double precioBase) {
+	public ProductoMenu(String nombre, double precioBase, int n) {
 		this.nombre = nombre;
 		this.precio = precioBase;
+		this.n = n;
 	}
 	
 	@Override
@@ -22,7 +24,12 @@ public class ProductoMenu implements Producto{
 
 	@Override
 	public String generarTextoFactura() {
-		return "* " + nombre + " -> $" + precio + "\n";
+		return n + ". " + nombre + " -> $" + precio + "\n";
+	}
+
+	@Override
+	public int getNo() {
+		return n;
 	} 
 	
 }

@@ -35,14 +35,19 @@ public class ProductoAjustado implements Producto{
 
 	@Override
 	public String generarTextoFactura() {
-		String mssg = "* " + productoBase.getNombre() + " -> $" + precio;
+		String mssg = productoBase.getNo() + ". " + productoBase.getNombre() + " -> $" + precio;
 		if (agregados != "") {
-			mssg += "  (Con adición de " + agregados + ")\n";
+			mssg += "\n  (Con adición de " + agregados + ")\n";
 		}
 		if (eliminados != "") {
-			mssg += "  (Sin " + eliminados + ")\n";
+			mssg += "\n  (Sin " + eliminados + ")\n";
 		}
 		return mssg;
+	}
+	
+	@Override
+	public int getNo() {
+		return productoBase.getNo();
 	}
 
 }

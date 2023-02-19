@@ -8,4 +8,6 @@ public interface Producto {
 	
 	public String generarTextoFactura();
 
+	public int getNo();
+
 }
