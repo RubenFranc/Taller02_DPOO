@@ -37,25 +37,28 @@ public class Aplicacion {
 			System.out.println(producto.generarTextoFactura());
 		}
 		
+		Map<Integer, String> mapPedidos = restaurante.getPedidos();
+		String idPedidos = "";
 		BufferedReader br_2 = new BufferedReader(new FileReader("idPedidos.txt"));
 		String id = br_2.readLine();
-		Map<Integer, String> mapPedidos = restaurante.getPedidos();
-		String idPedidos = id + "\n";
-		while (id != null) {
-			String id_ = id.replace("\n", "");
-			BufferedReader br_3 = new BufferedReader(new FileReader("pedidos/"+ id_ +".txt"));
-			String lineaFactura = br_3.readLine();
-			String factura_1 = "";
-			while (lineaFactura != null) {
-				factura_1 += lineaFactura + "\n";
-				lineaFactura = br_3.readLine();
-			}
-			br_3.close();
-			mapPedidos.put(Integer.parseInt(id), factura_1);
-			idPedidos += id + "\n";
-			id = br_2.readLine();
-		}
-		br_2.close();
+        if (!id.equals("0")) {
+    		idPedidos += id + "\n";
+    		while (id != null) {
+    			String id_ = id.replace("\n", "");
+    			BufferedReader br_3 = new BufferedReader(new FileReader("pedidos/"+ id_ +".txt"));
+    			String lineaFactura = br_3.readLine();
+    			String factura_1 = "";
+    			while (lineaFactura != null) {
+    				factura_1 += lineaFactura + "\n";
+    				lineaFactura = br_3.readLine();
+    			}
+    			br_3.close();
+    			mapPedidos.put(Integer.parseInt(id), factura_1);
+    			idPedidos += id + "\n";
+    			id = br_2.readLine();
+    		}
+    		br_2.close();
+        }		
 		
 		boolean continuar = true;
 		boolean pedidoEnCurso = false;
@@ -168,6 +171,7 @@ public class Aplicacion {
 							restaurante.cerrarYGuardarPedido();
 							pedidoEnCurso = false;
 							int idPedido = pedido.getIdPedido();
+							System.out.println("\nID PEDIDO: " + idPedido + "\n");
 							idPedidos += idPedido + "\n";
 							File file = new File("idPedidos.txt");
 							FileWriter fw = new FileWriter(file);
